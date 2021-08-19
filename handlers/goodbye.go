@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
+
+	"jamesvrooney/microservices/data"
 )
 
 // Goodbye handler for requests to /hello
@@ -18,19 +19,10 @@ func NewGoodbye(l *log.Logger) *Goodbye {
 
 // SayHello say hello
 func (h *Goodbye) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	encoder := json.NewEncoder(w)
+	products := data.GetProducts()
 
-	product := &Product{
-		ID:      6,
-		Name:    "Car (James Rooney)",
-		Country: "Ireland",
-	}
+	// encoder := json.NewEncoder(w)
 
-	encoder.Encode(product)
-}
-
-type Product struct {
-	ID      int    `json:"id"`
-	Name    string `json:"name"`
-	Country string `json:"country"`
+	// encoder.Encode(products)
+	products.ToJSON(w)
 }

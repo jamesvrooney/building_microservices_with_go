@@ -40,7 +40,7 @@ func main() {
 	}()
 
 	// trap sigterm or interupt and gracefully shutdown the server
-	interruptChannel := make(chan os.Signal, 1)
+	interruptChannel := make(chan os.Signal)
 
 	signal.Notify(interruptChannel, os.Interrupt)
 	signal.Notify(interruptChannel, os.Kill)
