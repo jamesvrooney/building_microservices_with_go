@@ -1,10 +1,9 @@
 package handlers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-
-	"jamesvrooney/microservices/data"
 )
 
 // Goodbye handler for requests to /hello
@@ -19,10 +18,5 @@ func NewGoodbye(l *log.Logger) *Goodbye {
 
 // SayHello say hello
 func (h *Goodbye) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	products := data.GetProducts()
-
-	// encoder := json.NewEncoder(w)
-
-	// encoder.Encode(products)
-	products.ToJSON(w)
+	fmt.Fprint(w, "<h1>Goodbye James!</h1>")
 }

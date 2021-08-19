@@ -16,11 +16,13 @@ func main() {
 
 	helloHandler := handlers.NewHello(logger)
 	goodbyeHandler := handlers.NewGoodbye(logger)
+	productHandler := handlers.NewProduct(logger)
 
 	sm := http.NewServeMux()
 
 	sm.Handle("/hello", helloHandler)
 	sm.Handle("/goodbye", goodbyeHandler)
+	sm.Handle("/products", productHandler)
 
 	server := &http.Server{
 		Addr:         ":9898",
